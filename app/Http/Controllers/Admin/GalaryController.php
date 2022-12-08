@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Galary\StoreRequest;
 use App\Http\Requests\Admin\Galary\UpdateRequest;
 use App\Models\Galary;
 use Illuminate\Support\Facades\DB;
+
 class GalaryController extends Controller
 {
     /**
@@ -42,26 +43,26 @@ class GalaryController extends Controller
     public function store(StoreRequest $request)
     {
         // Module action form
-        
-        
+
+
         // if ($request->file('image')) {
         //     $data = $request->except('_token');
         //     $file = $request->image;
         //     //dd($file);
         //     $file_name = $file->getClientOriginalName();
-           
+
         //     $file->move(public_path('uploads', $file_name));
         //     $data['path_name'] = $file;
         //     DB::table('galaries')->insert($data);
         // }
         //  //$data['created_at'] = new \DateTime();
-        
-        
+
+
         // return redirect()->route('admin.galary.index')->with('success', 'Add data successfully');
-        $path_namee = $request->file('image')->getClientOriginalName();
+        $path_name = $request->file('image')->getClientOriginalName();
         $request->file('image')->store('public/uploads/');
         $photo = new Galary();
-        $photo-> path_name = $path_namee;
+        $photo->path_name = $path_name;
         $photo->save();
         return redirect()->back();
     }
