@@ -58,10 +58,10 @@ class GalaryController extends Controller
         
         
         // return redirect()->route('admin.galary.index')->with('success', 'Add data successfully');
-        $path_name = $request->file('image')->getClientOriginalName();
+        $path_namee = $request->file('image')->getClientOriginalName();
         $request->file('image')->store('public/uploads/');
         $photo = new Galary();
-        $photo-> path_name = $path_name;
+        $photo-> path_name = $path_namee;
         $photo->save();
         return redirect()->back();
     }
