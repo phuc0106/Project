@@ -31,7 +31,7 @@
 				
 
 				<!-- Content area -->
-				<div class="content.abc">
+				<div class="content">
 					@if ($errors->any())
 					<div class="alert alert-danger">
 						<ul>
