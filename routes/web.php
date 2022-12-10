@@ -18,10 +18,15 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('admin.master');
+    return view('master');
 });
+Route::get('/index2', function () {
+    return view('index2');
+});
+// Route::get('/', function () {
+//     return view('admin.master');
+// });
 
 Route::prefix('auth')->name('auth')->group(function () {
     Route::get('login', [LoginController::class, 'showLogin'])->name('showLogin');
