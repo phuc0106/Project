@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -15,8 +19,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.modules.user.index');
+    {   
+        
+        // Show view user Data table
+        $data['user'] = DB::table('users')->orderBy('id','DESC')->get();
+        return view('admin.modules.user.index', $data);
     }
 
     /**
@@ -26,6 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        // Show user view create
         return view('admin.modules.user.create');
     }
 
@@ -37,7 +45,13 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+        // Module action form
+        $data = $request->except('_token','password_confirmation');
+        $data['created_at'] = new \DateTime();
+        DB::table('users')->insert($data);
+
+        return redirect()->route('admin.user.index')->with('success','Add data successfully');
+
     }
 
     /**
@@ -59,7 +73,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        // show user edit view
+        $data['user'] = DB::table('users')->where('id',$id)->first();
+        return view('admin.modules.user.edit',$data);
     }
 
     /**
@@ -71,7 +87,13 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        //
+        // Update Data user
+        $data = $request->except('_token','password_confirmation');
+        $data['updated_at'] = new \DateTime();
+        DB::table('users')->where('use_id',$id)->update($data);
+
+        return redirect()->route('admin.user.index')->with('success','Update data successfully');
+        
     }
 
     /**
@@ -82,6 +104,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete user
+        DB::table('users')->where('use_id',$id)->delete();
+        return redirect()->route('admin.user.index');
     }
 }

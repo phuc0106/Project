@@ -1,5 +1,4 @@
 <div class="slider-active slider-arrow">
-    href="{{ asset('user/assets/css/owl.carousel.min.css') }}">
     <div class="single-slider slide-height  d-flex align-items-end" data-overlay="dark-gradient" style="background-image: url({{ asset('images\briges\1.jpg')}}">
         <div class="container">
             <div class="row">
