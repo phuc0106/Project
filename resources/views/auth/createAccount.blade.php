@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Login - Incredible Bridge</title>
+	<title>Register - Incredible Bridge</title>
 
 	<!-- Global stylesheets -->
 	<link href="{{ asset('administrator/assets/fonts/inter/inter.css') }}" rel="stylesheet" type="text/css">
@@ -61,7 +60,7 @@
 	<!-- /main navbar -->
 
 
-	<!-- Page content --> 
+	<!-- Page content -->
 	<div class="page-content">
 
 		<!-- Main content -->
@@ -74,25 +73,19 @@
 				<div class="content d-flex justify-content-center align-items-center">
 
 					<!-- Login form -->
-					<form class="login-form" action="{{ route('auth.loginmodules') }}" method="POST" enctype="multipart/form-data" >
+					<form class="login-form" action="{{ route('auth.check_account') }}" method="POST"  enctype="multipart/form-data">
 						@csrf
 
 						<div class="card mb-0">
 							<div class="card-body">
-
 								<div class="text-center mb-3">
 									<div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
 										<img src="{{ asset('administrator/assets/images/logo_icon.svg') }}" class="h-48px" alt="">
 									</div>
-									<h5 class="mb-0">Login to your account</h5>
-									<span class="d-block text-muted">Enter your credentials below</span>
+									<h5 class="mb-0"><strong>Register</strong></h5>
+									<span class="d-block text-muted">Enter your registration information below.</span>
 								</div>
 
-								
-								@if(Session::has('loi'))
-								<p class="alert alert-info">{{ Session::get('loi') }}</p>
-								@endif
-								
 								@if ($errors->any())
 									<div class="alert alert-danger">
 										<ul>
@@ -102,12 +95,12 @@
 										</ul>
 									</div>
 								@endif
-
+								
+								
 								<div class="mb-3">
 									<label class="form-label">Email</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input name="email" type="email"  class="form-control" placeholder="JonhCena79@gmail.com">
-										
+										<input type="email" name="email"  class="form-control" placeholder="JonhCena79@gmail.com"> 
 										<div class="form-control-feedback-icon">
 											<i class="ph-user-circle text-muted"></i>
 										</div>
@@ -117,23 +110,35 @@
 								<div class="mb-3">
 									<label class="form-label">Password</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input name="password" type="password" class="form-control" placeholder="•••••••••••">
+										<input type="password"  name="password" class="form-control" placeholder="•••••••••••">
 										<div class="form-control-feedback-icon">
 											<i class="ph-lock text-muted"></i>
 										</div>
 									</div>
-
-	
 								</div>
 
-	
+								<div class="mb-3">
+									<label class="form-label">Password Confirm</label>
+									<div class="form-control-feedback form-control-feedback-start">
+										<input type="password"  name="password_confirmation" class="form-control" placeholder="•••••••••••">
+										<div class="form-control-feedback-icon">
+											<i class="ph-lock text-muted"></i>
+										</div>
+									</div>
+								</div>
+
+								<div class="mb-4">
+									<label class="form-label">Name</label>
+									<input type="text"  name="name" class="form-control" placeholder="example: Neymar Junior">
+								</div> 
+
 
 								<div class="mb-3">
-									<button type="submit" class="btn btn-primary w-100">Sign in</button>
+									<button type="submit" class="btn btn-primary w-100">Create !</button>
 								</div>
 
 								<div class="text-center">
-									<a href="{{ route('auth.showCreateAcount') }}">Create Account</a>
+									<a href="{{ route('auth.showLogin') }}">Login if you already have an account</a>
 								</div>
 							</div>
 						</div>

@@ -32,6 +32,7 @@
 
 				<!-- Content area -->
 				<div class="content">
+					<!--Hiện lỗi khi thêm -->
 					@if ($errors->any())
 					<div class="alert alert-danger">
 						<ul>

@@ -20,9 +20,9 @@
                                     <li><a href="index-5..html">Home Style 5</a></li>
                                 </ul> --}}
                             </li>
-                            <li><a href="#continents">News</a></li>
-                            <li><a href="#">Galary</a></li>
-                            <li><a href="lifestyle.html">About us</a></li>
+                            <li><a href="{{ route('front.post.index') }}">News</a></li>
+                            <li><a href="{{ route('front.galary.index') }}">Galary</a></li>
+                            <li><a href="#">About us</a></li>
                             
                         </ul>
                     </nav>

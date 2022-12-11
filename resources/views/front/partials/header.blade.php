@@ -29,7 +29,7 @@
         </div>
     </div>
     <!-- menu start -->
-    @include("partials.menu")
+    @include("front.partials.menu")
     <!-- menu end -->
     <div class="extra-info">
         <div class="close-icon">

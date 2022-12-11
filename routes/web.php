@@ -19,7 +19,10 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 Route::get('/', function () {
-    return view('master');
+    return view('front.index');
+});
+Route::get('front.contact', function () {
+    return view('front.contact');
 });
 Route::get('/index2', function () {
     return view('index2');
@@ -27,13 +30,35 @@ Route::get('/index2', function () {
 // Route::get('/', function () {
 //     return view('admin.master');
 // });
+Route::prefix('front')->name('front.')->group(function () {
+  
+    Route::prefix('galary')->name('galary.')->controller(GalaryController::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+    });
+    
+    
+    Route::prefix('post')->name('post.')->controller(GalaryController::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+       
+    });
+});
+
 
 Route::prefix('auth')->name('auth')->group(function () {
     Route::get('login', [LoginController::class, 'showLogin'])->name('showLogin');
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
-
+//root của admin
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('continent')->name('continent.')->controller(ContinentController::class)->group(function () {
@@ -98,3 +123,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
 });
+//root của front
+
+

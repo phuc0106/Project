@@ -21,10 +21,13 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules() // Các Quy Tắc - Nếu Gặp Lỗi Truy Cập Trong Rules Sẽ Show Lỗi dưới hàm message 
     {
         return [
             //
+           
+            'email' => 'required|exists:users,email', // Email Không Rỗng & Có Tồn Tại Trong DB hay không 
+            'password' => 'required', // Pass Không Rỗng & Phải Trùng && Giới Hạn ít nhất 6 ký tự
         ];
     }
 
@@ -33,10 +36,15 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function messages () 
+    public function messages ()  // Tuy chinh phan show Lỗi hàm flash Message
     {
         return [
             //
+        
+            'email.required' => 'Please Enter Your Email !',
+            'email.exists' => 'Email Does Not Exists !',
+
+            'password.required'=> 'Plese Enter Your Password !',
         ];
     }
 }
