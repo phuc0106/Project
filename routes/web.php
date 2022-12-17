@@ -21,6 +21,9 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('front.index');
 });
+Route::get('/admin', function () {
+    return view('admin.index');
+});
 Route::get('front.contact', function () {
     return view('front.contact');
 });
@@ -53,10 +56,13 @@ Route::prefix('front')->name('front.')->group(function () {
 });
 
 
-Route::prefix('auth')->name('auth')->group(function () {
-    Route::get('login', [LoginController::class, 'showLogin'])->name('showLogin');
-    Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('login', [LoginController::class, 'showLogin'])->name('showLogin'); 
+    Route::post('login', [LoginController::class, 'login'])->name('loginmodules'); 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    
+    Route::get('registration', [LoginController::class, 'show_registration'])->name('showCreateAcount'); //show
+    Route::post('registrationCheck', [LoginController::class, 'registration'])->name('check_account'); //xu li 
 });
 //root của admin
 Route::prefix('admin')->name('admin.')->group(function () {

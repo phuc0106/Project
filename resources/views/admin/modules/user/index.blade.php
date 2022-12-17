@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'User Index')
+@section('title', 'User Index')  {{-- Ttitle là tên user index alf giá Trị.. @Section = 'con' ảnh hưởng lên yield = 'cha' --}}
 @section('module', 'User')
 @section('action', 'Manage')
 
@@ -11,32 +11,40 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Page length options</h5>
+            <h5 class="mb-0"><strong>Member List</strong></h5>
         </div>
 
         <table class="table datatable-show-all">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Job Title</th>
-                    <th>DOB</th>
-                    <th>Status</th>
-                    <th class="text-center">Actions</th>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>User Password</th>
+                    <th>Image</th>
+                    <th>Created_at</th>
+                    <th>Updated_at</th>
+                    <th><strong>Actions</strong></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
+                
+                @foreach ($user as $item)
                 <tr>
-                    <td>Marth</td>
-                    <td><a href="#">Enright</a></td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="badge badge-success">Active</span></td>
+                    <td >{{ $loop->iteration }}</td>
+                    <td>{{ $item->name}}</td>
+                    <td>{{ $item->email}}</td>
+                    <td>{{ $item->password}}</td>
+                    <td>{{ $item->image}}</td>
+                    <td>{{ date("d/m/Y", strtotime($item->created_at)) }}</td> 
+                    <td>{{ date("d/m/Y", strtotime($item->updated_at)) }}</td>
                     <td class="text-center">
-                        <a>Edit</a>
-                        <a>Delete</a>
+                        <a href="{{ route('admin.user.edit',['id'=>$item->use_id]) }}">Edit |</a>
+                        <a href="{{ route('admin.user.destroy',['id'=>$item->use_id]) }}">Delete</a>
                     </td>
                 </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>

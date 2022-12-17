@@ -25,14 +25,16 @@
         <!-- Main navigation -->
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
-
+                @if(Auth::check())
+                <h5 class="sidebar-resize-hide flex-grow-1 my-auto">{{ Auth::user()->email }}</h5>
+                @endif
                 <!-- Main -->
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Main</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
@@ -40,8 +42,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                 <li class="nav-item">
+                    <a href="{{ route('auth.showLogin') }}" class="nav-link">
                         <i class="ph-sun"></i>
                         <span>
                             Login

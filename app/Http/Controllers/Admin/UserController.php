@@ -22,7 +22,7 @@ class UserController extends Controller
     {   
         
         // Show view user Data table
-        $data['user'] = DB::table('users')->orderBy('id','DESC')->get();
+        $data['user'] = DB::table('users')->orderBy('use_id','DESC')->get();
         return view('admin.modules.user.index', $data);
     }
 
@@ -74,7 +74,7 @@ class UserController extends Controller
     public function edit($id)
     {
         // show user edit view
-        $data['user'] = DB::table('users')->where('id',$id)->first();
+        $data['user'] = DB::table('users')->where('use_id',$id)->first();
         return view('admin.modules.user.edit',$data);
     }
 
@@ -105,7 +105,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //delete user
-        DB::table('users')->where('use_id',$id)->delete();
+        DB::table('users')->where('usr_id',$id)->delete();
         return redirect()->route('admin.user.index');
     }
 }
