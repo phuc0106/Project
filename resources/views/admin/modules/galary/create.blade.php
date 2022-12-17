@@ -15,18 +15,25 @@
             <form action="{{ route('admin.galary.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-3">
-                    <select  id="country-dropdown" class="form-control">
-                        <option value="">-- Select Bridge --</option>
-                        {{-- @foreach ($countries as $data)
-                        <option value="{{$data->id}}">
-                            {{$data->name}}
-                        </option>
-                        @endforeach --}}
+                    <label class="form-label">Choose a bridge:</label>
+                    <select  id="country-dropdown" class="form-control" name="bri_id">
+                        @if ($bri->count())
+
+                            @foreach($bri as $item)
+                            {{-- <option value="{{ $item->bri_id }}" {{ $selected_bri == $item->bri_id ? 'selected="selected"' : '' }}>{{ $item->name }}</option> --}}
+                            <option value="{{$item->bri_id}}">{{$item->name}}</option>
+                            @endforeach    
+                
+                        @endif
+                       
                     </select>
+
                 </div>
+
+                
                 <div class="mb-3">
                     <label class="form-label">Image:</label>
-                    <input name="image"  type="file" class="form-control" placeholder="Gallery Image">
+                    <input name="path_name"  type="file" class="form-control" placeholder="Gallery Image">
                 </div>
 
                 <button  type="submit" class="btn btn-outline-primary col-12"> UPLOAD </button>

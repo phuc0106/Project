@@ -22,7 +22,7 @@ class UserController extends Controller
     {   
         
         // Show view user Data table
-        $data['user'] = DB::table('users')->orderBy('use_id','DESC')->get();
+        $data['user'] = DB::table('users')->orderBy('id','DESC')->get();
         return view('admin.modules.user.index', $data);
     }
 
@@ -48,6 +48,14 @@ class UserController extends Controller
         // Module action form
         $data = $request->except('_token','password_confirmation');
         $data['created_at'] = new \DateTime();
+
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images/user'), $filename);
+            $data['image']= $filename;
+        }
+
         DB::table('users')->insert($data);
 
         return redirect()->route('admin.user.index')->with('success','Add data successfully');
@@ -74,7 +82,8 @@ class UserController extends Controller
     public function edit($id)
     {
         // show user edit view
-        $data['user'] = DB::table('users')->where('use_id',$id)->first();
+        $data['user'] = DB::table('users')->where('id',$id)->first();
+        
         return view('admin.modules.user.edit',$data);
     }
 
@@ -90,7 +99,13 @@ class UserController extends Controller
         // Update Data user
         $data = $request->except('_token','password_confirmation');
         $data['updated_at'] = new \DateTime();
-        DB::table('users')->where('use_id',$id)->update($data);
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images/user'), $filename);
+            $data['image']= $filename;
+        }
+        DB::table('users')->where('id',$id)->update($data);
 
         return redirect()->route('admin.user.index')->with('success','Update data successfully');
         
@@ -105,7 +120,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //delete user
-        DB::table('users')->where('usr_id',$id)->delete();
+        DB::table('users')->where('id',$id)->delete();
         return redirect()->route('admin.user.index');
     }
 }

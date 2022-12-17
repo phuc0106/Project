@@ -19,6 +19,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
+                    <th>Note</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -27,14 +30,12 @@
                 <tr>
                     <td>{{$item->con_id}}</td>
                     <td>{{$item->name}}</td>
-                    
-                    <td class="text-center">
-                      
-                        <button type="button" class="btn btn-success">
-                            <a href="{{route('admin.continent.edit',['id'=>$item->con_id])}}">Edit</a></button> 
-                      <button type="button" class="btn btn-danger">
-                            <a href="{{route('admin.continent.destroy',['id'=>$item->con_id])}}"> delete</a>
-                    </button>
+                    <td>{{$item->created_at}}</td>
+                    <td>{{$item->updated_at}}</td>
+                    <td></td>
+                    <td class="text-center">                   
+                        <a href="{{route('admin.continent.edit',['id'=>$item->con_id])}}">Edit</a>
+                        <a href="{{route('admin.continent.destroy',['id'=>$item->con_id])}}"> delete</a>
                     </td>
                 </tr>
                 @endforeach

@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() 
     {
         return true;
     }
@@ -25,7 +25,11 @@ class StoreRequest extends FormRequest
     {
         return [
             //
-        ];
+            'name' => 'required', // Name Không Được Rỗng
+            'password' => 'required|confirmed|min:6', // Pass Không Rỗng & Phải Trùng && Giới Hạn ít nhất 6 ký tự
+            'email' => 'required|unique:users,email', // Email Không Rỗng & Độc Nhất 
+            'image' =>'required'
+        ]; 
     }
 
     /**
@@ -37,6 +41,12 @@ class StoreRequest extends FormRequest
     {
         return [
             //
+            'name.required' => 'Please enter username !',
+            'password.required'=> 'Plese enter user password !',
+            'password.confirmed'=> 'Wrong password !',
+            'email.required' => 'Please enter email !',
+            'email.unique'=>'Email user already exists !',
+            'image'=>'Image can not be empty'
         ];
     }
 }

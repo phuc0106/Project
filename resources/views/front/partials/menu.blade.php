@@ -10,7 +10,7 @@
                 <div class="header__menu header-red f-left">
                     <nav id="mobile-menu">
                         <ul>
-                            <li class="active"><a href="#">Home</a>
+                            <li class="active"><a href="{{ route('front.bridge.index') }}">Home</a>
                                 {{-- <ul class="submenu">
                                     <li><a href="index.html">Home Style 1</a></li>
                                     <li><a href="index-2.html">Home Style 2</a>
@@ -22,7 +22,7 @@
                             </li>
                             <li><a href="{{ route('front.post.index') }}">News</a></li>
                             <li><a href="{{ route('front.galary.index') }}">Galary</a></li>
-                            <li><a href="#">About us</a></li>
+                            <li><a href="{{ route('front.contact') }}">About us</a></li>
                             
                         </ul>
                     </nav>

@@ -24,7 +24,8 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'path_name' => 'required|unique:posts|max:7', // Name Không Được Rỗng
+
         ];
     }
 

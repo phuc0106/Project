@@ -46,7 +46,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Logout
+     * Logout 
      */
     public function logout (Request $request) 
     {

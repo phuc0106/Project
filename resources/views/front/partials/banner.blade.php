@@ -6,7 +6,7 @@
                     <div class="slider pb-60">
                         <div class="slider__text">
                             <span class="post-cat mb-10" data-animation="fadeInUp" data-delay=".2s">
-                                <a href="#">Xem chi tiết</a>
+                                <a href="{{route('front.bridge.detail')}}">Xem chi tiết</a>
                             </span>
                             <h3 class="mb-15" data-animation="fadeInUp" data-delay=".4s">
                                 <!--Đưa tên cầu-->
@@ -26,7 +26,7 @@
                     <div class="slider pb-60">
                         <div class="slider__text">
                             <span class="post-cat mb-10" data-animation="fadeInUp" data-delay=".2s">
-                                <a href="#">Xem chi tiết</a>
+                                <a href="{{route('front.bridge.detail')}}">Xem chi tiết</a>
                             </span>
                             <h3 class="mb-15" data-animation="fadeInUp" data-delay=".4s">
                                 <!--Đưa tên cầu-->

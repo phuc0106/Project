@@ -13,7 +13,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="header__logo text-center">
                         <a href="index.html">
-                            <img src="{{ asset('user/assets/img/logo/logo.png')}}" height="50%" alt="Header Logo">
+                            <img src="{{ asset('user/assets/img/logo/logo-white.png')}}" height="50%" alt="Header Logo">
                         </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="header__logo">
             <a href="index.html">
-                <img src="assets/img/logo/footer-logo.png" alt="Header Logo">
+                <img src="user/assets/img/logo/logo-white.png" alt="Header Logo">
             </a>
         </div>
         <div class="social-icon-right mt-30 mb-50">

@@ -32,6 +32,8 @@
                     </div>
                     @if(Auth::check())
                     <span class="d-none d-lg-inline-block mx-lg-2">{{ Auth::user()->name }}</span>
+                    @else 
+                    <span class="d-none d-lg-inline-block mx-lg-2">guest</span>
                     @endif
                 </a>
 

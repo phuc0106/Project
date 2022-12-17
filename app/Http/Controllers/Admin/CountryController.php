@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Country\StoreRequest;
 use App\Http\Requests\Admin\Country\UpdateRequest;
-
+use Illuminate\Support\Facades\DB;
 class CountryController extends Controller
 {
     /**
@@ -16,7 +16,15 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return view('admin.modules.country.index');
+
+        $country = DB::select('select cou.*, con.name as continent
+                                 from countries cou inner join continents con on con.con_id=cou.cou_id
+                                  order by name');
+ 
+        
+
+        return view('admin.modules.country.index', ['country' => $country]);
+        
     }
 
     /**
@@ -26,7 +34,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        return view('admin.modules.country.create');
+        $cont=DB::select('select * from continents');
+        return view('admin.modules.country.create',['cont' => $cont]);
     }
 
     /**
@@ -37,7 +46,20 @@ class CountryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+         // Module action form
+         $data = $request->except('_token');
+         $data['created_at'] = new \DateTime();
+ 
+         if($request->file('flag_images_path')){
+             $file= $request->file('flag_images_path');
+             $filename= date('YmdHi').$file->getClientOriginalName();
+             $file-> move(public_path('images/flag'), $filename);
+             $data['flag_images_path']= $filename;
+         }
+ 
+         DB::table('countries')->insert($data);
+ 
+         return redirect()->route('admin.country.index')->with('success','Add Country successfully');
     }
 
     /**
@@ -57,9 +79,22 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function getContinent()
+    {
+     
+        $data = DB::table("continents")->pluck('name','con_id');
+        return json_encode($data);
+    }
+
+
     public function edit($id)
     {
-        //
+        $country = DB::select('select cou.*, con.name as continent
+        from countries cou inner join continents con on con.con_id=cou.cou_id
+         order by name')->where('con_id',$id)->first();;
+       
+      
+        return view('admin.modules.country.edit',$data);
     }
 
     /**

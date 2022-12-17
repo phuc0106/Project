@@ -38,14 +38,15 @@
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
-                            <span class="d-block fw-normal opacity-50">No pending orders</span>
+                           
                         </span>
                     </a>
                 </li>
                  <li class="nav-item">
                     <a href="{{ route('auth.showLogin') }}" class="nav-link">
-                        <i class="ph-sun"></i>
-                        <span>
+                        {{-- <i class="ph-user"> --}}
+                            <i class="ph-user"></i>
+                            <span>
                             Login
                         </span>
                     </a>
@@ -78,6 +79,16 @@
                     <ul class="nav-group-sub collapse {{ request()->is('admin/country/*') ? 'show' : '' }}">
                         <li class="nav-item"><a href="{{ route('admin.country.index') }}" class="nav-link {{ request()->is('admin/country/index') ? 'active' : '' }}">Manage</a></li>
                         <li class="nav-item"><a href="{{ route('admin.country.create') }}" class="nav-link {{ request()->is('admin/country/create') ? 'active' : '' }}">Create</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu {{ request()->is('admin/typebridge/*') ? 'nav-item-expanded nav-item-open' : '' }}">
+                    <a href="#" class="nav-link ">
+                        <i class="ph-layout"></i>
+                        <span>Typebridge</span>
+                    </a>
+                    <ul class="nav-group-sub collapse {{ request()->is('admin/typebridge/*') ? 'show' : '' }}">
+                        <li class="nav-item"><a href="{{ route('admin.typebridge.index') }}" class="nav-link {{ request()->is('admin/typebridge/index') ? 'active' : '' }}">Manage</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.typebridge.create') }}" class="nav-link {{ request()->is('admin/typebridge/create') ? 'active' : '' }}">Create</a></li>
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu {{ request()->is('admin/bridge/*') ? 'nav-item-expanded nav-item-open' : '' }}">
@@ -118,6 +129,16 @@
                     <ul class="nav-group-sub collapse {{ request()->is('admin/distance/*') ? 'show' : '' }}">
                         <li class="nav-item"><a href="{{ route('admin.distance.index') }}" class="nav-link {{ request()->is('admin/comment/index') ? 'active' : '' }}">Manage</a></li>
                         <li class="nav-item"><a href="{{ route('admin.distance.create') }}" class="nav-link {{ request()->is('admin/comment/create') ? 'active' : '' }}">Create</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu {{ request()->is('admin/post/*') ? 'nav-item-expanded nav-item-open' : '' }}">
+                    <a href="#" class="nav-link ">
+                        <i class="ph-layout"></i>
+                        <span>Post</span>
+                    </a>
+                    <ul class="nav-group-sub collapse {{ request()->is('admin/post/*') ? 'show' : '' }}">
+                        <li class="nav-item"><a href="{{ route('admin.post.index') }}" class="nav-link {{ request()->is('admin/post/index') ? 'active' : '' }}">Manage</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.post.create') }}" class="nav-link {{ request()->is('admin/post/create') ? 'active' : '' }}">Create</a></li>
                     </ul>
                 </li>
             </ul>

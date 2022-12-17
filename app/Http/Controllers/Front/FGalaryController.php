@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Front\Galary\StoreRequest;
 use App\Http\Requests\Front\Galary\UpdateRequest;
-
+use App\Models\Galary;
 use Illuminate\Support\Facades\DB;
 
-class GalaryController extends Controller
+class FGalaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,17 @@ class GalaryController extends Controller
     public function index()
     {
         // Show view user Data table
-        $data['post'] = DB::table('post')->orderBy('created_date', 'DESC')->get();
-        return view('front.post.index');
+ 
+        // $data['galary'] = DB::table('galaries')->orderBy('created_at', 'DESC')->get();
+        // return view('front.galary.index', $data);
+
+        $gal = DB::select('select gal.*, bri.name as bridge
+                                 from bridges bri inner join galaries gal on bri.bri_id=gal.bri_id
+                                  order by name');
+ 
+        
+
+        return view('front.galary.index', ['galary' => $gal]);
     }
 
     /**
@@ -31,7 +40,7 @@ class GalaryController extends Controller
     public function create()
     {
         // Show user view create
-        return view('admin.modules.galary.create');
+        return view('front.galary.create');
     }
 
     /**

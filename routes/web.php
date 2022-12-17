@@ -7,7 +7,16 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\BridgeController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GalaryController;
+use App\Http\Controllers\Admin\TypebridgeController;
+use App\Http\Controllers\Admin\PostController;
+//Auth
 use App\Http\Controllers\Auth\LoginController;
+
+//Front
+use App\Http\Controllers\Front\FGalaryController;
+use App\Http\Controllers\Front\FBridgeController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\FPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,15 +27,14 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('front.index');
-});
+Route::get('/', [FBridgeController::class,'index']);
+
+
+
 Route::get('/admin', function () {
     return view('admin.index');
 });
-Route::get('front.contact', function () {
-    return view('front.contact');
-});
+
 Route::get('/index2', function () {
     return view('index2');
 });
@@ -34,8 +42,14 @@ Route::get('/index2', function () {
 //     return view('admin.master');
 // });
 Route::prefix('front')->name('front.')->group(function () {
-  
-    Route::prefix('galary')->name('galary.')->controller(GalaryController::class)->group(function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('contact', 'contact')->name('contact');
+        
+    });
+    //Route::get('contact', 'HomeController@contact')->name('contact');
+
+    Route::prefix('galary')->name('galary.')->controller(FGalaryController::class)->group(function () {
+       
         Route::get('index', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
@@ -44,8 +58,13 @@ Route::prefix('front')->name('front.')->group(function () {
         Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
     
+    Route::prefix('bridge')->name('bridge.')->controller(FBridgeController::class)->group(function () {
+       
+        Route::get('index', 'index')->name('index');
+        Route::get('detail/{id}', 'detail')->name('detail');
+    });
     
-    Route::prefix('post')->name('post.')->controller(GalaryController::class)->group(function () {
+    Route::prefix('post')->name('post.')->controller(FPostController::class)->group(function () {
         Route::get('index', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
@@ -75,8 +94,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('update/{id}', 'update')->name('update');
         Route::get('destroy/{id}', 'destroy')->name('destroy');
     });
-
-    Route::prefix('user')->name('user.')->controller(UserController::class)->group(function () {
+    Route::prefix('typebridge')->name('typebridge.')->controller(TypebridgeController::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+       
+    });
+    Route::prefix('user')->middleware(['check-login-admin'])->name('user.')->controller(UserController::class)->group(function () {
         Route::get('index', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
@@ -92,9 +119,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::post('update/{id}', 'update')->name('update');
         Route::get('destroy/{id}', 'destroy')->name('destroy');
+        Route::get('getContinent', 'getContinent')->name('getContinent');
     });
 
     Route::prefix('bridge')->name('bridge.')->controller(BridgeController::class)->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+        Route::get('gettype', 'gettype')->name('gettype');
+        Route::get('getCountry', 'getCountry')->name('getCountry');
+
+    });
+    Route::prefix('post')->name('post.')->controller(PostController::class)->group(function () {
         Route::get('index', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');

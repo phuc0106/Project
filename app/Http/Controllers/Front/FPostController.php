@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Front\Galary\StoreRequest;
-use App\Http\Requests\Front\Galary\UpdateRequest;
-use App\Models\Galary;
+use App\Http\Requests\Front\Post\StoreRequest;
+use App\Http\Requests\Front\Post\UpdateRequest;
+
 use Illuminate\Support\Facades\DB;
 
-class GalaryController extends Controller
+class FPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class GalaryController extends Controller
     public function index()
     {
         // Show view user Data table
-        $data['galary'] = DB::table('galaries')->orderBy('created_date', 'DESC')->get();
-        return view('front.galary.index');
+        $data['post'] = DB::table('posts')->orderBy('created_at', 'DESC')->get();
+        return view('front.post.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class GalaryController extends Controller
     public function create()
     {
         // Show user view create
-        return view('front.galary.create');
+        return view('front.post.create');
     }
 
     /**
@@ -42,39 +42,9 @@ class GalaryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // Module action form
-
-
-        // if ($request->file('image')) {
-        //     $data = $request->except('_token');
-        //     $file = $request->image;
-        //     //dd($file);
-        //     $file_name = $file->getClientOriginalName();
-
-        //     $file->move(public_path('uploads', $file_name));
-        //     $data['path_name'] = $file;
-        //     DB::table('galaries')->insert($data);
-        // }
-        //  //$data['created_at'] = new \DateTime();
-
-
-        // return redirect()->route('admin.galary.index')->with('success', 'Add data successfully');
-        $path_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->store('public/uploads/');
-        $photo = new Galary();
-        $photo->path_name = $path_name;
-        $photo->save();
-        return redirect()->back();
+       
     }
-    public function imageUploadPost()
-    {
-        request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('uploads'), $imageName);
-    }
+   
 
     /**
      * Display the specified resource.
@@ -96,8 +66,8 @@ class GalaryController extends Controller
     public function edit($id)
     {
         // show user edit view
-        $data['galary'] = DB::table('galaries')->where('gal_id', $id)->first();
-        return view('admin.modules.galary.edit', $data);
+        $data['post'] = DB::table('posts')->where('post_id', $id)->first();
+        return view('front.post.edit', $data);
     }
 
     /**

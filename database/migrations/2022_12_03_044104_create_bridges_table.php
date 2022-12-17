@@ -26,12 +26,7 @@ return new class extends Migration
             $table->float('length')->Nullable; 
             $table->longtext('description')->Nullable;
             $table->string('location_map')->Nullable;
-            $table->date('open_date')->Nullable;
-            $table->boolean('longest_span')->Default(0);
-            $table->boolean('historical_great')->Default(0);
-            $table->boolean('high_level')->Default(0);
-            $table->boolean('iconic')->Default(0);
-            $table->boolean('modern')->Default(0);              
+            $table->date('open_date')->Nullable;                  
             $table->timestamps();
         });
     }

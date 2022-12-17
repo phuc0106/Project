@@ -19,7 +19,9 @@ class GalaryController extends Controller
     public function index()
     {
         // Show view user Data table
-        $data['galary'] = DB::table('galaries')->orderBy('gal_id', 'DESC')->get();
+        $data['galary'] = DB::select('select gal.*, bri.name as bridge
+        from bridges bri inner join galaries gal on bri.bri_id=gal.bri_id
+         order by created_at');
         return view('admin.modules.galary.index', $data);
     }
 
@@ -31,7 +33,14 @@ class GalaryController extends Controller
     public function create()
     {
         // Show user view create
-        return view('admin.modules.galary.create');
+        $bri = DB::table('bridges')->get();
+        $selected_bri=DB::table('bridges')->first();
+       
+       
+
+        // return view('front.galary.create', ['bri' => $bri],['selected_bri' => $selected_bri]);
+        //return view('front.galary.create', compact('bri', 'selected_bri'));
+        return view('admin.modules.galary.create', compact('bri', 'selected_bri'));
     }
 
     /**
@@ -42,29 +51,20 @@ class GalaryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // Module action form
+        $data = $request->except('_token');
+        $data['created_at'] = new \DateTime();
+        if($request->file('path_name')){
+            $file= $request->file('path_name');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images/bridges'), $filename);
+            $data['path_name']= $filename;
+        }
 
+      
+        DB::table('galaries')->insert($data);
 
-        // if ($request->file('image')) {
-        //     $data = $request->except('_token');
-        //     $file = $request->image;
-        //     //dd($file);
-        //     $file_name = $file->getClientOriginalName();
-
-        //     $file->move(public_path('uploads', $file_name));
-        //     $data['path_name'] = $file;
-        //     DB::table('galaries')->insert($data);
-        // }
-        //  //$data['created_at'] = new \DateTime();
-
-
-        // return redirect()->route('admin.galary.index')->with('success', 'Add data successfully');
-        $path_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->store('public/uploads/');
-        $photo = new Galary();
-        $photo->path_name = $path_name;
-        $photo->save();
-        return redirect()->back();
+        return redirect()->route('admin.galary.index')->with('success','Add data successfully');
+       
     }
     public function imageUploadPost()
     {

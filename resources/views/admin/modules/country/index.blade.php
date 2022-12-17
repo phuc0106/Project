@@ -4,6 +4,7 @@
 @section('action', 'Manage')
 
 @push('jscore')
+
 <script src="{{ asset('administrator/assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
 @endpush
 
@@ -11,32 +12,41 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Page length options</h5>
+            <h5 class="mb-0"><strong>Country List</strong></h5>
         </div>
 
         <table class="table datatable-show-all">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Job Title</th>
-                    <th>DOB</th>
-                    <th>Status</th>
-                    <th class="text-center">Actions</th>
+                    <th>ID</th>
+                    <th>Country Name</th>
+                    <th>Continent</th>                  
+                    <th>Image</th>
+                   <th>Created_at</th>
+                    <th><strong>Actions</strong></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
+                
+                @foreach ($country as $item)
                 <tr>
-                    <td>Marth</td>
-                    <td><a href="#">Enright</a></td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="badge badge-success">Active</span></td>
+                    <td >{{ $loop->iteration }}</td>
+                    <td>{{ $item->name}}</td>
+                    <td>{{ $item->continent}}</td>
+                    <td>
+                        
+
+                        <img src="{{ url('images/flag/' .$item->flag_images_path) }}"
+                        style="height: 100px; width: 150px;">
+                    </td>
+                    <<td>{{ date("d/m/Y", strtotime($item->created_at)) }}</td> 
                     <td class="text-center">
-                        <a>Edit</a>
-                        <a>Delete</a>
+                        <a href="{{ route('admin.country.edit',['id'=>$item->cou_id]) }}">Edit |</a>
+                        <a href="{{ route('admin.country.destroy',['id'=>$item->cou_id]) }}">Delete</a>
                     </td>
                 </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>
